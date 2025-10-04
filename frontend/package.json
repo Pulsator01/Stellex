@@ -1,0 +1,13 @@
+{
+  "name": "stellex-frontend",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "serve": "http-server -p 5500 -c-1 ."
+  },
+  "devDependencies": {
+    "http-server": "^14.1.1"
+  }
+}
+
+
