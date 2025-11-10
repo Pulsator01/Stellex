@@ -7,6 +7,7 @@ import {
   nativeToScVal,
   StrKey,
   scValToNative,
+  xdr,
 } from '@stellar/stellar-sdk';
 import type { BuildTriggerOneRequest, OracleTicker, BuildTrailingCreateRequest } from './types';
 
@@ -99,10 +100,10 @@ export async function submitSignedXDR(signedXDR: string) {
   const maxTries = 20;
   for (let i = 0; i < maxTries; i++) {
     const res = await server.getTransaction(send.hash);
-    if (res.status === SorobanRpc.GetTransactionStatus.SUCCESS) {
+    if (res.status === SorobanRpc.Api.GetTransactionStatus.SUCCESS) {
       return { status: 'SUCCESS', hash: send.hash, resultXdr: res.resultXdr?.toXDR('base64') };
     }
-    if (res.status === SorobanRpc.GetTransactionStatus.FAILED) {
+    if (res.status === SorobanRpc.Api.GetTransactionStatus.FAILED) {
       return { status: 'FAILED', hash: send.hash, error: res.resultXdr?.toXDR('base64') };
     }
     await new Promise((r) => setTimeout(r, 1000));
